@@ -99,12 +99,14 @@ pub fn handle_input_events() {
     };
     let mut msg: MSG = unsafe { MaybeUninit::zeroed().assume_init() };
     unsafe { GetMessageW(&mut msg, 0 as HWND, 0, 0) };
+    println!("Getting here");
 }
 
 pub fn shutdown() {
     println!("{}", KEYBD_BINDS.lock().unwrap().len());
     MOUSE_BINDS.lock().unwrap().clear();
     KEYBD_BINDS.lock().unwrap().clear();
+    println!("{}", KEYBD_BINDS.lock().unwrap().len());
     unset_hook(&*KEYBD_HHOOK);
     unset_hook(&*MOUSE_HHOOK);
 }

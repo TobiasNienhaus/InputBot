@@ -102,7 +102,7 @@ pub fn handle_input_events() {
 }
 
 pub fn shutdown() {
-    println!(KEYBD_BINDS.lock().unwrap().len());
+    println!("{}", KEYBD_BINDS.lock().unwrap().len());
     MOUSE_BINDS.lock().unwrap().clear();
     KEYBD_BINDS.lock().unwrap().clear();
     unset_hook(&*KEYBD_HHOOK);

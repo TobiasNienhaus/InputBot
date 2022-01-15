@@ -215,6 +215,11 @@ pub fn handle_input_events() {
     }
 }
 
+pub fn shutdown() {
+    MOUSE_BINDS.lock().unwrap().clear();
+    KEYBD_BINDS.lock().unwrap().clear();
+}
+
 fn handle_input_event(event: Event) {
     match event {
         Keyboard(keyboard_event) => {

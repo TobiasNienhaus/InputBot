@@ -101,6 +101,14 @@ pub fn handle_input_events() {
     unsafe { GetMessageW(&mut msg, 0 as HWND, 0, 0) };
 }
 
+pub fn shutdown() {
+    println!(KEYBD_BINDS.lock().unwrap().len());
+    MOUSE_BINDS.lock().unwrap().clear();
+    KEYBD_BINDS.lock().unwrap().clear();
+    unset_hook(&*KEYBD_HHOOK);
+    unset_hook(&*MOUSE_HHOOK);
+}
+
 unsafe extern "system" fn keybd_proc(code: c_int, w_param: WPARAM, l_param: LPARAM) -> LRESULT {
     if KEYBD_BINDS.lock().unwrap().is_empty() {
         unset_hook(&*KEYBD_HHOOK);
